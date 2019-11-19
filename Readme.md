@@ -1,7 +1,7 @@
 # Личный проект «Менеджер задач» [![Build status][travis-image]][travis-url]
 
 * Студент: [Антон Кричевцов](https://up.htmlacademy.ru/ecmascript/10/user/285581).
-* Наставник: `Неизвестно`.
+* Наставник: [Евгений Колегов](https://up.htmlacademy.ru/ecmascript/10/user/21780).
 
 ---
 
