@@ -1,7 +1,9 @@
+'use strict';
+
 const TASK_COUNT = 3;
 
 const createMenuTemplate = () => {
-  return (
+    return (
       `<section class="control__btn-wrap">
         <input
           type="radio"
@@ -30,13 +32,13 @@ const createMenuTemplate = () => {
           >STATISTICS</label
         >
       </section>`
-    );
+  );
 };
 
 
 const createFilterTemplate = () => {
   return (
-      `<section class="main__filter filter container">
+    `<section class="main__filter filter container">
         <input
           type="radio"
           id="filter__all"
@@ -451,7 +453,7 @@ const createTaskEditTemplate = () => {
         </div>
       </form>
   </article>`
-  )
+  );
 };
 
 
@@ -478,9 +480,9 @@ const taskListElement = siteMainElement.querySelector(`.board__tasks`);
 render(taskListElement, createTaskEditTemplate(), `beforeend`);
 
 new Array(TASK_COUNT).fill(``).forEach(
-  () => {
-    render(taskListElement, createTaskTemplate(), `beforeend`);
-  }
+    () => {
+      render(taskListElement, createTaskTemplate(), `beforeend`);
+    }
 );
 
 render(taskListElement, createMoreButtonTemplate(), `beforeend`);
