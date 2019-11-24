@@ -3,8 +3,8 @@
 const TASK_COUNT = 3;
 
 const createMenuTemplate = () => {
-    return (
-      `<section class="control__btn-wrap">
+  return (
+    `<section class="control__btn-wrap">
         <input
           type="radio"
           name="control"
