@@ -41,9 +41,7 @@ const getRandomDate = () => {
 
 
 const generateRepeatingDays = () => {
-  return (
-    Object.assign({}, DefaultRepeatingDays, {'mo': Math.random() > 0.5})
-  );
+  return Object.assign({}, DefaultRepeatingDays, {'mo': Math.random() > 0.5});
 };
 
 
