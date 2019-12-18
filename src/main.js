@@ -41,6 +41,7 @@ const renderTask = (taskListElement, task) => {
     if (!taskList.querySelector(`.card--edit`)) {
       replaceTaskToEdit();
       document.addEventListener(`keydown`, onEscKeyDown);
+      editForm.removeEventListener(`submit`, replaceEditToTask);
     }
   });
 
