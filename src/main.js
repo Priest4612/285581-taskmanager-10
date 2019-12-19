@@ -41,7 +41,6 @@ const renderTask = (taskListElement, task) => {
     if (!taskList.querySelector(`.card--edit`)) {
       replaceTaskToEdit();
       document.addEventListener(`keydown`, onEscKeyDown);
-      editForm.removeEventListener(`submit`, replaceEditToTask);
     }
   });
 
@@ -49,7 +48,10 @@ const renderTask = (taskListElement, task) => {
   const taskEditElement = new TaskEditElement(task);
   const editForm = taskEditElement.getElement().querySelector(`form`);
 
-  editForm.addEventListener(`submit`, replaceEditToTask);
+  editForm.addEventListener(`submit`, () => {
+    replaceEditToTask();
+    document.removeEventListener(`keydown`, onEscKeyDown);
+  });
 
   render(taskListElement, taskElement.getElement(), RenderPosition.BEFOREEND);
 };
