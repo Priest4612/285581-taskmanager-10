@@ -37,14 +37,21 @@ const renderTask = (taskListElement, task) => {
   const editButton = taskElement.getElement().querySelector(`.card__btn--edit`);
 
   editButton.addEventListener(`click`, () => {
-    replaceTaskToEdit();
-    document.addEventListener(`keydown`, onEscKeyDown);
+    const taskList = document.querySelector(`.board__tasks`);
+    if (!taskList.querySelector(`.card--edit`)) {
+      replaceTaskToEdit();
+      document.addEventListener(`keydown`, onEscKeyDown);
+    }
   });
+
 
   const taskEditElement = new TaskEditElement(task);
   const editForm = taskEditElement.getElement().querySelector(`form`);
 
-  editForm.addEventListener(`submit`, replaceEditToTask);
+  editForm.addEventListener(`submit`, () => {
+    replaceEditToTask();
+    document.removeEventListener(`keydown`, onEscKeyDown);
+  });
 
   render(taskListElement, taskElement.getElement(), RenderPosition.BEFOREEND);
 };
