@@ -6,10 +6,10 @@ import TaskListElement from './components/task-list.js';
 import TaskEditElement from './components/task-edit.js';
 import TaskElement from './components/task.js';
 import LoadMoreButtonElement from './components/load-more-button.js';
+import SortElement from './components/sort.js';
 import {generateFilters} from './mock/filter-mock.js';
 import {generateTasks} from './mock/task-mock.js';
-import {render, RenderPosition} from './utils.js';
-import SortElement from './components/sort.js';
+import {render, replace, RenderPosition} from './utils/render.js';
 
 const TASK_COUNT = 22;
 const SHOWING_TASKS_COUNT_ON_START = 8;
@@ -26,17 +26,16 @@ const renderTask = (taskListElement, task) => {
   };
 
   const replaceEditToTask = () => {
-    taskListElement.replaceChild(taskElement.getElement(), taskEditElement.getElement());
+    replace(taskElement, taskEditElement);
   };
 
   const replaceTaskToEdit = () => {
-    taskListElement.replaceChild(taskEditElement.getElement(), taskElement.getElement());
+    replace(taskEditElement, taskElement);
   };
 
   const taskElement = new TaskElement(task);
-  const editButton = taskElement.getElement().querySelector(`.card__btn--edit`);
 
-  editButton.addEventListener(`click`, () => {
+  taskElement.setEditButtonClickHandler(() => {
     const taskList = document.querySelector(`.board__tasks`);
     if (!taskList.querySelector(`.card--edit`)) {
       replaceTaskToEdit();
@@ -44,11 +43,8 @@ const renderTask = (taskListElement, task) => {
     }
   });
 
-
   const taskEditElement = new TaskEditElement(task);
-  const editForm = taskEditElement.getElement().querySelector(`form`);
-
-  editForm.addEventListener(`submit`, () => {
+  taskEditElement.setSubmitHandler(() => {
     replaceEditToTask();
     document.removeEventListener(`keydown`, onEscKeyDown);
   });

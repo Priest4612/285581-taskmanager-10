@@ -1,5 +1,5 @@
-import {getRandomArrayItem} from '../utils.js';
-import {getRandomIntegerNumber} from '../utils.js';
+import {getRandomArrayItem} from '../utils/common.js';
+import {getRandomIntegerNumber} from '../utils/common.js';
 import {Colors} from '../const.js';
 
 const DAYS_LIMIT = 7;

@@ -1,5 +1,5 @@
 import {Days, MONTH_NAMES, Colors} from '../const.js';
-import {formatTime} from '../utils.js';
+import {formatTime} from '../utils/common.js';
 import AbstractComponent from './abstract-component.js';
 
 const createRepeatingDayMarkup = (days, repeatingDays) => {
@@ -193,5 +193,11 @@ export default class TaskEditElement extends AbstractComponent {
 
   getTemplate() {
     return createTaskEditTemplate(this._task);
+  }
+
+  setSubmitHandler(handler) {
+    this.getElement()
+    .querySelector(`form`)
+    .addEventListener(`submit`, handler);
   }
 }
