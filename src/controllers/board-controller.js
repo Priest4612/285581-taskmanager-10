@@ -1,5 +1,6 @@
 import NoTasksElement from '../components/no-tasks.js';
 import SortElement from '../components/sort.js';
+import {SortType} from '../components/sort.js';
 import TaskListElement from '../components/task-list.js';
 import TaskEditElement from '../components/task-edit.js';
 import TaskElement from '../components/task.js';
@@ -101,5 +102,30 @@ export default class BoardController {
 
     renderTasks(taskListElement, tasks.slice(0, showingTasksCount));
     renderLoadMoreButton();
+
+    this._sortElement.setSortTypeChangeHandler((sortType) => {
+      let sortedTasks = [];
+
+      switch (sortType) {
+        case SortType.DATE_UP:
+          sortedTasks = tasks.slice().sort((a, b) => a.dueDate - b.dueDate);
+          break;
+        case SortType.DATE_DOWN:
+          sortedTasks = tasks.slice().sort((a, b) => b.dueDate - a.dueDate);
+          break;
+        case SortType.DEFAULT:
+          sortedTasks = tasks.slice(0, showingTasksCount);
+          break;
+      }
+      taskListElement.innerHTML = ``;
+
+      renderTasks(taskListElement, sortedTasks);
+
+      if (sortType === SortType.DEFAULT) {
+        renderLoadMoreButton();
+      } else {
+        remove(this._loadMoreButtonElement);
+      }
+    });
   }
 }
