@@ -9,7 +9,7 @@ const createNoTasksTemplate = () => {
 };
 
 
-export default class NoTasksElement extends AbstractComponent {
+export default class NoTasksComponent extends AbstractComponent {
   getTemolate() {
     return createNoTasksTemplate();
   }

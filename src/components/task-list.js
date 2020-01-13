@@ -9,7 +9,7 @@ const createTaskListTemplate = () => {
 };
 
 
-export default class TaskListElement extends AbstractComponent {
+export default class TaskListComponent extends AbstractComponent {
   getTemplate() {
     return createTaskListTemplate();
   }

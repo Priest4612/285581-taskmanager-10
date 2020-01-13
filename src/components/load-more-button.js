@@ -7,7 +7,7 @@ const createLoadMoreButtonTemplate = () => {
 };
 
 
-export default class LoadMoreButtonElement extends AbstractComponent {
+export default class LoadMoreButtonComponent extends AbstractComponent {
   getTemplate() {
     return createLoadMoreButtonTemplate();
   }
