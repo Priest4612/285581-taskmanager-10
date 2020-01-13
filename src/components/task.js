@@ -17,6 +17,17 @@ const createHashtagsMarkup = (hashtags) => {
 };
 
 
+const createButtonMarckup = (name, isActive) => {
+  return (
+    `<button
+      type="button"
+      class="card__btn card__btn--${name} ${isActive ? `` : `card__btn--disabled`}"
+    >
+    ${name}
+    </button>`
+  );
+};
+
 const createTaskTemplate = (task) => {
   const {description, dueDate, repeatingDays, tags, color} = task;
 
@@ -27,7 +38,11 @@ const createTaskTemplate = (task) => {
   const time = isDateShowing ? formatTime(dueDate) : ``;
 
   const hashtags = createHashtagsMarkup(Array.from(tags));
-  const repeatClass = Object.values(repeatingDays).some(Boolean) ? `card -- repeat` : ``;
+  const editButton = createButtonMarckup(`edit`, true);
+  const arciveButton = createButtonMarckup(`archive`, task.isArchive);
+  const favoritesButton = createButtonMarckup(`favorites`, task.isFavorite);
+
+  const repeatClass = Object.values(repeatingDays).some(Boolean) ? `card--repeat` : ``;
   const deadlineClass = isExpired ? `card--deadline` : ``;
 
   return (
@@ -35,18 +50,9 @@ const createTaskTemplate = (task) => {
       <div class="card__form">
         <div class="card__inner">
           <div class="card__control">
-            <button type="button" class="card__btn card__btn--edit">
-              edit
-            </button>
-            <button type="button" class="card__btn card__btn--archive">
-              archive
-            </button>
-            <button
-              type="button"
-              class="card__btn card__btn--favorites card__btn--disabled"
-            >
-              favorites
-            </button>
+            ${editButton}
+            ${arciveButton}
+            ${favoritesButton}
           </div>
 
           <div class="card__color-bar">
@@ -84,7 +90,7 @@ const createTaskTemplate = (task) => {
 };
 
 
-export default class TaskElement extends AbstractComponent {
+export default class TaskComponent extends AbstractComponent {
   constructor(task) {
     super();
 
@@ -96,8 +102,17 @@ export default class TaskElement extends AbstractComponent {
   }
 
   setEditButtonClickHandler(handler) {
-    this.getElement()
-    .querySelector(`.card__btn--edit`)
-    .addEventListener(`click`, handler);
+    this.getElement().querySelector(`.card__btn--edit`)
+      .addEventListener(`click`, handler);
+  }
+
+  setFavoritesButtonClickHandler(handler) {
+    this.getElement().querySelector(`.card__btn--favorites`)
+      .addEventListener(`click`, handler);
+  }
+
+  setArchiveButtonClickHandler(handler) {
+    this.getElement().querySelector(`.card__btn--archive`)
+      .addEventListener(`click`, handler);
   }
 }
